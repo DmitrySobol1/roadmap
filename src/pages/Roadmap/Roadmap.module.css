@@ -1,0 +1,27 @@
+.levelimg {
+    width: 50px;
+}
+
+.wrapperModal {
+    margin:50px 0px;
+    text-align: center;
+}
+
+.wrapperIcons {
+    display: flex;
+    
+    justify-content: center;
+}
+
+.text {
+    font-family: var(--tgui--font-family);
+    font-weight: bold;
+}
+
+.logoimg {
+    width: 50px;
+}
+
+.logoimg2 {
+    width: 34px;
+}
