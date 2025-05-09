@@ -1,11 +1,12 @@
 import type { ComponentType, JSX } from 'react';
 
-import { IndexPage } from '@/pages/IndexPage/IndexPage';
+import { IndexPage } from '@/pages/EnterPage/EnterPage';
 import { InitDataPage } from '@/pages/InitDataPage.tsx';
 import { LaunchParamsPage } from '@/pages/LaunchParamsPage.tsx';
 import { ThemeParamsPage } from '@/pages/ThemeParamsPage.tsx';
 import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
 import { Roadmap } from '@/pages/Roadmap/Roadmap';
+import { Onboarding } from '@/pages/Onboarding/Onboarding';
 
 import {Trainee} from '@/pages/Roadmap/Trainee'
 import {Junior} from '@/pages/Roadmap/Junior'
@@ -25,6 +26,7 @@ export const routes: Route[] = [
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },
   { path: '/trainee', Component: Trainee, title:'Trainee'},
   { path: '/junior', Component: Junior, title:'Junior'},
+  { path: '/onboarding', Component: Onboarding, title:'Onboarding'},
   {
     path: '/ton-connect',
     Component: TONConnectPage,
