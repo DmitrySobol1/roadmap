@@ -12,7 +12,7 @@ import {
 
 
 
-export const IndexPage: FC = () => {
+export const EnterPage: FC = () => {
 
   const navigate = useNavigate();
   const initDataState = useSignal(_initDataState);

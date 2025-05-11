@@ -1,6 +1,6 @@
 import type { ComponentType, JSX } from 'react';
 
-import { IndexPage } from '@/pages/EnterPage/EnterPage';
+import { EnterPage } from '@/pages/EnterPage/EnterPage';
 import { InitDataPage } from '@/pages/InitDataPage.tsx';
 import { LaunchParamsPage } from '@/pages/LaunchParamsPage.tsx';
 import { ThemeParamsPage } from '@/pages/ThemeParamsPage.tsx';
@@ -19,7 +19,7 @@ interface Route {
 }
 
 export const routes: Route[] = [
-  { path: '/', Component: IndexPage },
+  { path: '/', Component: EnterPage },
   { path: '/roadmap', Component: Roadmap, title: 'Roadmap' },
   { path: '/init-data', Component: InitDataPage, title: "Init data" },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
