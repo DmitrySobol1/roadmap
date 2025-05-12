@@ -11,6 +11,7 @@ import { Onboarding } from '@/pages/Onboarding/Onboarding';
 import {Trainee} from '@/pages/Roadmap/Trainee'
 import {Junior} from '@/pages/Roadmap/Junior'
 import {Middle} from '@/pages/Roadmap/Middle'
+import {Senior} from '@/pages/Roadmap/Senior'
 
 interface Route {
   path: string;
@@ -28,6 +29,7 @@ export const routes: Route[] = [
   { path: '/trainee', Component: Trainee, title:'Trainee'},
   { path: '/junior', Component: Junior, title:'Junior'},
   { path: '/middle', Component: Middle, title:'Middle'},
+  { path: '/senior', Component: Senior, title:'Senior'},
   { path: '/onboarding', Component: Onboarding, title:'Onboarding'},
   {
     path: '/ton-connect',

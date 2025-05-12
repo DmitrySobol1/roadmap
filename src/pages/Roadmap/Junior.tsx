@@ -21,6 +21,7 @@ import { Icon16Chevron } from '@telegram-apps/telegram-ui/dist/icons/16/chevron'
 
 import youtubelogo from '../../img/youtubelogo.png';
 import vklogo from '../../img/vklogo.png';
+import junpic from '../../img/jun.png'
 
 export const Junior: FC = () => {
   function openSite() {
@@ -71,7 +72,8 @@ export const Junior: FC = () => {
             <img
               alt="sticker"
               className={styles.levelimg}
-              src="https://xelene.me/telegram.gif"
+              // src="https://xelene.me/telegram.gif"
+              src={junpic}
             />
           </Placeholder>
         </Section>

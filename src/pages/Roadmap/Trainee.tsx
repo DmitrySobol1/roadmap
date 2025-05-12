@@ -17,6 +17,8 @@ import styles from './Roadmap.module.css';
 import { Icon24QR } from '@telegram-apps/telegram-ui/dist/icons/24/qr';
 import youtubelogo from '../../img/youtubelogo.png';
 import vklogo from '../../img/vklogo.png';
+import traineepic from '../../img/trainee.png'
+
 
 export const Trainee: FC = () => {
   function showVideo(platform: string) {
@@ -41,7 +43,8 @@ export const Trainee: FC = () => {
             <img
               alt="sticker"
               className={styles.levelimg}
-              src="https://xelene.me/telegram.gif"
+              // src="https://xelene.me/telegram.gif"
+              src={traineepic}
             />
           </Placeholder>
         </Section>
