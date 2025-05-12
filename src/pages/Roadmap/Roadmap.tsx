@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { Section, List, Cell } from '@telegram-apps/telegram-ui';
+import { Section, List, Cell, Divider } from '@telegram-apps/telegram-ui';
 import { Link } from '@/components/Link/Link.tsx';
 import { Page } from '@/components/Page.tsx';
 
@@ -10,10 +10,9 @@ import { Icon28Stats } from '@telegram-apps/telegram-ui/dist/icons/28/stats';
 
 
 
-
+// import styles from './Roadmap.module.css';
 
 export const Roadmap: FC = () => {
-
   return (
     <Page back={false}>
       <List>
@@ -28,13 +27,16 @@ export const Roadmap: FC = () => {
             </Cell>
           </Link>
 
+          <Divider />
+
+         
           <Link to="/junior">
             <Cell
               before={<Icon28Stats />}
               after={<Icon16Chevron />}
               subtitle="стандартный функционал"
             >
-              Новичок (Junior)
+              Начинающий (Junior)
             </Cell>
           </Link>
         </Section>
