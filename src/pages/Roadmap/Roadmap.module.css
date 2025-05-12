@@ -5,12 +5,14 @@
 .wrapperModal {
     margin:50px 0px;
     text-align: center;
+    background:#ebebeb;
 }
 
 .wrapperIcons {
     display: flex;
-    
+    /* background:'lightgrey'; */
     justify-content: center;
+    
 }
 
 .text {

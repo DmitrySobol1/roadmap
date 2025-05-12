@@ -6,7 +6,8 @@ import {
   Banner,
   Button,
   Checkbox,
-  Modal,
+  Modal
+  
 } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
 
@@ -35,7 +36,7 @@ export const Junior: FC = () => {
       window.open('https://vkvideo.ru/playlist/-228193677_3', '_blank');
     }
   }
-  
+
   function showVideoTlgShop(platform: string) {
     if (platform === 'yt') {
       window.open(
@@ -46,7 +47,7 @@ export const Junior: FC = () => {
       window.open('https://vkvideo.ru/playlist/-228193677_2', '_blank');
     }
   }
-  
+
   function showVideoOnlineSchool(platform: string) {
     if (platform === 'yt') {
       window.open(
@@ -57,7 +58,6 @@ export const Junior: FC = () => {
       window.open('https://vkvideo.ru/playlist/-228193677_4', '_blank');
     }
   }
-
 
   return (
     <Page back={true}>
@@ -112,8 +112,9 @@ export const Junior: FC = () => {
         </Section>
 
         <Section header="Полезно изучить на данном уровне">
-          
           <Modal
+            // header={<Icon16Chevron/>}
+            style = {{backgroundColor:'#ebebeb'}}
             trigger={
               <Cell
                 Component="label"
@@ -147,14 +148,13 @@ export const Junior: FC = () => {
           <Modal
             trigger={
               <Cell
-            Component="label"
-            before={<Icon16Chevron />}
-            description="готовый шаблон и обучение созданию магазина с оплатой, реферальной системой и розыгрышем"
-            multiline
-          >
-            Телеграм магазин
-            
-          </Cell>
+                Component="label"
+                before={<Icon16Chevron />}
+                description="готовый шаблон и обучение созданию магазина с оплатой, реферальной системой и розыгрышем"
+                multiline
+              >
+                Телеграм магазин
+              </Cell>
             }
           >
             <Section>
@@ -175,18 +175,17 @@ export const Junior: FC = () => {
               </div>
             </Section>
           </Modal>
-          
+
           <Modal
             trigger={
               <Cell
-            Component="label"
-            before={<Icon16Chevron />}
-            description="готовый шаблон и обучение созданию проекта для онлайн образования"
-            multiline
-          >
-            Онлайн школа в боте
-            
-          </Cell>
+                Component="label"
+                before={<Icon16Chevron />}
+                description="готовый шаблон и обучение созданию проекта для онлайн образования"
+                multiline
+              >
+                Онлайн школа в боте
+              </Cell>
             }
           >
             <Section>
@@ -207,9 +206,6 @@ export const Junior: FC = () => {
               </div>
             </Section>
           </Modal>
-          
-          
-         
         </Section>
       </List>
     </Page>
