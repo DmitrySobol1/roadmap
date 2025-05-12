@@ -7,6 +7,8 @@ import { ThemeParamsPage } from '@/pages/ThemeParamsPage.tsx';
 import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
 import { Roadmap } from '@/pages/Roadmap/Roadmap';
 import { Onboarding } from '@/pages/Onboarding/Onboarding';
+import { Materials } from '@/pages/Materials/Materials';
+import { Templates } from '@/pages/Templates/Templates';
 
 import {Trainee} from '@/pages/Roadmap/Trainee'
 import {Junior} from '@/pages/Roadmap/Junior'
@@ -31,6 +33,9 @@ export const routes: Route[] = [
   { path: '/middle', Component: Middle, title:'Middle'},
   { path: '/senior', Component: Senior, title:'Senior'},
   { path: '/onboarding', Component: Onboarding, title:'Onboarding'},
+  { path: '/materials', Component: Materials, title:'Materials'},
+  { path: '/templates', Component: Templates, title:'Templates'},
+
   {
     path: '/ton-connect',
     Component: TONConnectPage,
