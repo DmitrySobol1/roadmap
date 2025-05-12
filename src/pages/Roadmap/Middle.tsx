@@ -22,26 +22,26 @@ import { Icon16Chevron } from '@telegram-apps/telegram-ui/dist/icons/16/chevron'
 import youtubelogo from '../../img/youtubelogo.png';
 import vklogo from '../../img/vklogo.png';
 
-export const Junior: FC = () => {
+export const Middle: FC = () => {
   function openSite() {
     window.open('https://easydev-school.ru/bootcamp', '_blank');
   }
 
-  function showVideoIntensive(platform: string) {
+  function showVideoAIinLichka(platform: string) {
     if (platform === 'yt') {
       window.open(
-        'https://www.youtube.com/playlist?list=PLRNHYuZu4T1V_OQ0GE-CtZ9HsyRzuaV6k',
+        'https://youtu.be/7gQXexCbnqI?si=SJhc_gf1EdFosTnF',
         '_blank'
       );
     } else {
-      window.open('https://vkvideo.ru/playlist/-228193677_3', '_blank');
+      window.open('https://vkvideo.ru/video-228193677_456239033', '_blank');
     }
   }
 
-  function showVideoTlgShop(platform: string) {
+  function showVideoCloseClub(platform: string) {
     if (platform === 'yt') {
       window.open(
-        'https://www.youtube.com/playlist?list=PLRNHYuZu4T1UnR52kzDpBwZM3SXoVL2cr',
+        'https://youtu.be/Tz-56DwbLM0?si=z0Cj7tT_9SeG5WKV',
         '_blank'
       );
     } else {
@@ -49,14 +49,14 @@ export const Junior: FC = () => {
     }
   }
 
-  function showVideoOnlineSchool(platform: string) {
+  function showVideoConnectPayment(platform: string) {
     if (platform === 'yt') {
       window.open(
-        'https://www.youtube.com/playlist?list=PLRNHYuZu4T1VJBSDuXpO2fRMg5PLqRgPx',
+        'https://youtu.be/WZbH_aE9Xsc?si=FOl0i-q5yWBM8MMz',
         '_blank'
       );
     } else {
-      window.open('https://vkvideo.ru/playlist/-228193677_4', '_blank');
+      window.open('https://vkvideo.ru/video-228193677_456239017', '_blank');
     }
   }
 
@@ -65,8 +65,8 @@ export const Junior: FC = () => {
       <List>
         <Section>
           <Placeholder
-            description="тот, кто владеет стандартным функционалом ноу-код платформы"
-            header="Начинающий (Junior)"
+            description="тот, кто умеет интегрировать бота с любым сервисом по API"
+            header="Средний (middle)"
           >
             <img
               alt="sticker"
@@ -80,30 +80,38 @@ export const Junior: FC = () => {
           <Cell
             Component="label"
             before={<Checkbox name="checkbox" value="1" />}
-            description="знать блоки цепочка сообщений, условия,
-            операция над переменной"
+            description="знание работы блоков «http запрос», «JS интерпретатор», «входящий вебхук»"
             multiline
           >
-            Базовые блоки платформы
+            Продвинутые блоки платформы
           </Cell>
 
           <Cell
             Component="label"
             before={<Checkbox name="checkbox" value="1" />}
-            description="понимать, что такое «переменные», «теги» и для чего они могут
-            использоваться"
+            description="умение интегрировать ботов со сторонними сервисами по API"
             multiline
           >
-            Основные понятия
+            Интеграции по API
           </Cell>
-        </Section>
+        
 
+          <Cell
+            Component="label"
+            before={<Checkbox name="checkbox" value="1" />}
+            description="использование в работе API Telegram и API Jetbot"
+            multiline
+          >
+            API Telegram и Jetbot
+          </Cell>
+        
+</Section>
         <Section header="Как перейти на следующий уровень">
           <Banner
             before={<Icon28AddCircle />}
             //   callout="Urgent notification"
             header="Программа «Буткемп»"
-            description="чтобы быстро освоить навыки для перехода на следующий уровень, достаточно пройти нашу программу «Буткемп»"
+            description="на программе «Буткемп» вы закрепите знания по текущему уровню и заложите фундамент для перехода на следующий"
             type="section"
           >
             <Button size="s" before={<Icon16Chevron />} onClick={openSite}>
@@ -120,10 +128,10 @@ export const Junior: FC = () => {
               <Cell
                 Component="label"
                 before={<Icon16Chevron />}
-                description="«база» по работе на платформе"
+                description="готовый шаблон по интеграции ИИ для ответов в личке по своей базе данных"
                 multiline
               >
-                Первый интенсив
+                Бот с ИИ в личке
               </Cell>
             }
           >
@@ -131,17 +139,17 @@ export const Junior: FC = () => {
               <div className={styles.wrapperModal}>
                 
                 <div className={styles.wrapperIcons}>
-                  <div onClick={() => showVideoIntensive('yt')}>
+                  <div onClick={() => showVideoAIinLichka('yt')}>
                     <img src={youtubelogo} className={styles.logoimg} />
                     <Cell>на YouTube</Cell>
                   </div>
-                  <div onClick={() => showVideoIntensive('vk')}>
+                  <div onClick={() => showVideoAIinLichka('vk')}>
                     <img src={vklogo} className={styles.logoimg2} />
                     <Cell>в ВКонтакте</Cell>
                   </div>
                 </div>
                 <span className={styles.text}>
-                  Смотреть бесплатный курс «Первый интенсив»
+                  Смотреть видео «Бот с ИИ в личке»
                 </span>
               </div>
             </Section>
@@ -152,27 +160,27 @@ export const Junior: FC = () => {
               <Cell
                 Component="label"
                 before={<Icon16Chevron />}
-                description="готовый шаблон и обучение созданию магазина с оплатой, реферальной системой и розыгрышем"
+                description="готовый шаблон для создания закрытого клуба в Телеграм"
                 multiline
               >
-                Телеграм магазин
+                Закрытый клуб
               </Cell>
             }
           >
             <Section>
               <div className={styles.wrapperModal}>
                 <div className={styles.wrapperIcons}>
-                  <div onClick={() => showVideoTlgShop('yt')}>
+                  <div onClick={() => showVideoCloseClub('yt')}>
                     <img src={youtubelogo} className={styles.logoimg} />
                     <Cell>на YouTube</Cell>
                   </div>
-                  <div onClick={() => showVideoTlgShop('vk')}>
+                  <div onClick={() => showVideoCloseClub('vk')}>
                     <img src={vklogo} className={styles.logoimg2} />
                     <Cell>в ВКонтакте</Cell>
                   </div>
                 </div>
                 <span className={styles.text}>
-                  Смотреть плейлист создание «Telegram магазина»
+                  Смотреть видео по созданию «Закрытого клуба»
                 </span>
               </div>
             </Section>
@@ -183,27 +191,27 @@ export const Junior: FC = () => {
               <Cell
                 Component="label"
                 before={<Icon16Chevron />}
-                description="готовый шаблон и обучение созданию проекта для онлайн образования"
+                description="готовый шаблон по подключению платежных систем"
                 multiline
               >
-                Онлайн школа в боте
+                Подключение любой платежки
               </Cell>
             }
           >
             <Section>
               <div className={styles.wrapperModal}>
                 <div className={styles.wrapperIcons}>
-                  <div onClick={() => showVideoOnlineSchool('yt')}>
+                  <div onClick={() => showVideoConnectPayment('yt')}>
                     <img src={youtubelogo} className={styles.logoimg} />
                     <Cell>на YouTube</Cell>
                   </div>
-                  <div onClick={() => showVideoOnlineSchool('vk')}>
+                  <div onClick={() => showVideoConnectPayment('vk')}>
                     <img src={vklogo} className={styles.logoimg2} />
                     <Cell>в ВКонтакте</Cell>
                   </div>
                 </div>
                 <span className={styles.text}>
-                  Смотреть плейлист бот для «Онлайн школы»
+                  Смотреть видео «Подключение любой платежной системы»
                 </span>
               </div>
             </Section>

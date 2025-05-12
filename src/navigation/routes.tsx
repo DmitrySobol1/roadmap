@@ -10,6 +10,7 @@ import { Onboarding } from '@/pages/Onboarding/Onboarding';
 
 import {Trainee} from '@/pages/Roadmap/Trainee'
 import {Junior} from '@/pages/Roadmap/Junior'
+import {Middle} from '@/pages/Roadmap/Middle'
 
 interface Route {
   path: string;
@@ -26,6 +27,7 @@ export const routes: Route[] = [
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },
   { path: '/trainee', Component: Trainee, title:'Trainee'},
   { path: '/junior', Component: Junior, title:'Junior'},
+  { path: '/middle', Component: Middle, title:'Middle'},
   { path: '/onboarding', Component: Onboarding, title:'Onboarding'},
   {
     path: '/ton-connect',

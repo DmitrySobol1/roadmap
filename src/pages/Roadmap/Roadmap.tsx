@@ -23,7 +23,7 @@ export const Roadmap: FC = () => {
               after={<Icon16Chevron />}
               subtitle="только начал изучение"
             >
-              Стажер (Trainee)
+              Стажер (trainee)
             </Cell>
           </Link>
 
@@ -34,11 +34,24 @@ export const Roadmap: FC = () => {
             <Cell
               before={<Icon28Stats />}
               after={<Icon16Chevron />}
-              subtitle="стандартный функционал"
+              subtitle="знает стандартные функции"
             >
-              Начинающий (Junior)
+              Начинающий (junior)
             </Cell>
           </Link>
+        
+          <Link to="/middle">
+            <Cell
+              before={<Icon28Stats />}
+              after={<Icon16Chevron />}
+              subtitle="делает любые интеграции"
+            >
+              Средний (middle)
+            </Cell>
+          </Link>
+        
+        
+        
         </Section>
       </List>
     </Page>
