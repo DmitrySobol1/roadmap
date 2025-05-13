@@ -48,7 +48,7 @@ export const Middle: FC = () => {
         '_blank'
       );
     } else {
-      window.open('https://vkvideo.ru/playlist/-228193677_2', '_blank');
+      window.open('https://vk.com/video-228193677_456239047', '_blank');
     }
   }
 
