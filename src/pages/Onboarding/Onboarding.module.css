@@ -20,6 +20,8 @@ align-items: center;
 width: 95%;
 border-radius: 20px;
 margin-bottom: 30px;
+border: 1px solid #168acd;
+/* border: 1px solid black; */
 }
 
 .onboardingImg2 {
@@ -28,4 +30,5 @@ margin-bottom: 30px;
 height: 350px;
 border-radius: 20px;
 margin-bottom: 30px;
+border: 1px solid #168acd;
 }
