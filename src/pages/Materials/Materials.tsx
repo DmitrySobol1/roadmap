@@ -2,14 +2,20 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Section, List, Cell, Image, Tabbar } from '@telegram-apps/telegram-ui';
+import {
+  Section,
+  List,
+  Cell,
+    Tabbar,
+  Chip,
+} from '@telegram-apps/telegram-ui';
 import { Page } from '@/components/Page.tsx';
 
 import { Icon28Devices } from '@telegram-apps/telegram-ui/dist/icons/28/devices';
 import { Icon28Archive } from '@telegram-apps/telegram-ui/dist/icons/28/archive';
 import { Icon28Heart } from '@telegram-apps/telegram-ui/dist/icons/28/heart';
 
-import soon from '../../img/soon.png';
+
 
 export const Materials: FC = () => {
   const tabs = [
@@ -48,16 +54,15 @@ export const Materials: FC = () => {
     <Page back={false}>
       <List>
         <Section header="Архив материалов">
-
-
           <Cell
             multiline
             subtitle="здесь будет собран архив всех обучающих материалов, с возможностью быстрого поиска по ключевым словам, используемым блокам, уровню сложности и т.д. Вы сможете быстро найти ответ на любой ваш вопрос по разработке за считанные секунды"
           >
-            <Image size={48} src={soon} />
             
-           
-            Раздел скоро появится ...
+            <div style={{marginBottom:'10px'}}>
+              <Chip mode='mono'>Скоро ... </Chip>
+            </div>
+            Раздел в разработке
           </Cell>
         </Section>
 

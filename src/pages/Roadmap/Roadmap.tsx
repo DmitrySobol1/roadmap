@@ -57,7 +57,7 @@ export const Roadmap: FC = () => {
     } else if (id === 2) {
       navigate('/materials');
     } else if (id === 3) {
-      navigate('/onboarding');
+      navigate('/templates');
     }
   }
 

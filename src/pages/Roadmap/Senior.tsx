@@ -10,6 +10,7 @@ import {
   
 } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Page } from '@/components/Page.tsx';
 
@@ -24,6 +25,8 @@ import youtubelogo from '../../img/youtubelogo.png';
 import senpic from '../../img/sen.png'
 
 export const Senior: FC = () => {
+
+  const navigate = useNavigate();
   function openSite() {
     window.open('https://easydev-school.ru/tma', '_blank');
   }
@@ -50,6 +53,9 @@ export const Senior: FC = () => {
     }
   }
 
+   function backBtnListener(){
+navigate('/roadmap');
+  }
   
 
   return (
@@ -172,6 +178,19 @@ export const Senior: FC = () => {
 
          
         </Section>
+
+        <div className={styles.btnDiv}>
+            <div className={styles.backBtn}>
+              <Button
+                mode="filled"
+                size="m"
+                stretched
+                onClick={backBtnListener}
+              >
+                назад
+              </Button>
+            </div>
+          </div>
       </List>
     </Page>
   );

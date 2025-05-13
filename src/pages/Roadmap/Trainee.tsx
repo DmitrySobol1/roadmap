@@ -8,7 +8,7 @@ import {
   Modal,
 } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 import { Page } from '@/components/Page.tsx';
 
@@ -21,6 +21,8 @@ import traineepic from '../../img/trainee.png'
 
 
 export const Trainee: FC = () => {
+
+  const navigate = useNavigate();
   function showVideo(platform: string) {
     if (platform === 'yt') {
       window.open(
@@ -31,6 +33,11 @@ export const Trainee: FC = () => {
       window.open('https://vkvideo.ru/playlist/-228193677_3', '_blank');
     }
   }
+
+  function backBtnListener(){
+navigate('/roadmap');
+  }
+
 
   return (
     <Page back={true}>
@@ -87,6 +94,18 @@ export const Trainee: FC = () => {
           </Banner>
         </Section>
 
+<div className={styles.btnDiv}>
+            <div className={styles.backBtn}>
+              <Button
+                mode="filled"
+                size="m"
+                stretched
+                onClick={backBtnListener}
+              >
+                назад
+              </Button>
+            </div>
+          </div>
         
       </List>
     </Page>

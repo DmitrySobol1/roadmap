@@ -6,8 +6,9 @@ import {
   Section,
   List,
   Cell,
-    Image,
+  
   Tabbar,
+  Chip
 } from '@telegram-apps/telegram-ui';
 import { Page } from '@/components/Page.tsx';
 
@@ -15,7 +16,7 @@ import { Icon28Devices } from '@telegram-apps/telegram-ui/dist/icons/28/devices'
 import { Icon28Archive } from '@telegram-apps/telegram-ui/dist/icons/28/archive';
 import { Icon28Heart } from '@telegram-apps/telegram-ui/dist/icons/28/heart';
 
-import soon from '../../img/soon.png';
+
 
 export const Templates: FC = () => {
   const tabs = [
@@ -60,8 +61,11 @@ export const Templates: FC = () => {
             //   after={<Icon16Chevron />}
             subtitle="здесь будут собраны готовые шаблоны разных проектов, в том числе и те, доступ к которым сейчас закрыт и выдается только избранным)"
           >
-            <Image size={48} src={soon} />
-            Раздел скоро появится ...
+            
+            <div style={{marginBottom:'10px'}}>
+                          <Chip mode='mono'>Скоро ... </Chip>
+                        </div>
+            Раздел в разработке 
           </Cell>
         </Section>
 

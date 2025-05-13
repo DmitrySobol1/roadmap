@@ -27,3 +27,13 @@
 .logoimg2 {
     width: 34px;
 }
+
+.btnDiv {
+display: flex;
+align-items: center;
+    justify-content: center;
+} 
+
+.backBtn {
+    width: 95%;
+}

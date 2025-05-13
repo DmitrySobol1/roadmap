@@ -10,6 +10,7 @@ import {
   
 } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Page } from '@/components/Page.tsx';
 
@@ -24,6 +25,7 @@ import vklogo from '../../img/vklogo.png';
 import middlepic from '../../img/mid.png'
 
 export const Middle: FC = () => {
+  const navigate = useNavigate();
   function openSite() {
     window.open('https://easydev-school.ru/bootcamp', '_blank');
   }
@@ -59,6 +61,10 @@ export const Middle: FC = () => {
     } else {
       window.open('https://vkvideo.ru/video-228193677_456239017', '_blank');
     }
+  }
+
+  function backBtnListener(){
+navigate('/roadmap');
   }
 
   return (
@@ -219,6 +225,18 @@ export const Middle: FC = () => {
             </Section>
           </Modal>
         </Section>
+        <div className={styles.btnDiv}>
+            <div className={styles.backBtn}>
+              <Button
+                mode="filled"
+                size="m"
+                stretched
+                onClick={backBtnListener}
+              >
+                назад
+              </Button>
+            </div>
+          </div>
       </List>
     </Page>
   );

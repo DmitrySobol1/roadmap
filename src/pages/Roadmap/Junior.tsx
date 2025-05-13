@@ -10,6 +10,7 @@ import {
   
 } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Page } from '@/components/Page.tsx';
 
@@ -24,6 +25,9 @@ import vklogo from '../../img/vklogo.png';
 import junpic from '../../img/jun.png'
 
 export const Junior: FC = () => {
+
+const navigate = useNavigate();
+
   function openSite() {
     window.open('https://easydev-school.ru/bootcamp', '_blank');
   }
@@ -59,6 +63,10 @@ export const Junior: FC = () => {
     } else {
       window.open('https://vkvideo.ru/playlist/-228193677_4', '_blank');
     }
+  }
+
+  function backBtnListener(){
+navigate('/roadmap');
   }
 
   return (
@@ -211,6 +219,19 @@ export const Junior: FC = () => {
             </Section>
           </Modal>
         </Section>
+
+       <div className={styles.btnDiv}>
+            <div className={styles.backBtn}>
+              <Button
+                mode="filled"
+                size="m"
+                stretched
+                onClick={backBtnListener}
+              >
+                назад
+              </Button>
+            </div>
+          </div>
       </List>
     </Page>
   );
