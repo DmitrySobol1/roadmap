@@ -1,5 +1,6 @@
 import { useState, useEffect, type FC } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import axios from '@/axios';
 
 import { Page } from '@/components/Page.tsx';
 import { Card } from '@/components/Card/Card.tsx';
@@ -64,10 +65,7 @@ export const LessonListPage: FC = () => {
   useEffect(() => {
     const fetchLessons = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:4444/lessons/${courseId}`
-        );
-        const data = await response.json();
+        const { data } = await axios.get(`/lessons/${courseId}`);
         if (Array.isArray(data)) {
           setLessons(data);
         }

@@ -1,5 +1,6 @@
 import { useState, useEffect, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from '@/axios';
 
 import { Page } from '@/components/Page.tsx';
 import { Card } from '@/components/Card/Card.tsx';
@@ -25,8 +26,7 @@ export const IndexPage: FC = () => {
   useEffect(() => {
     const fetchCourseTypes = async () => {
       try {
-        const response = await fetch('http://localhost:4444/courseTypes');
-        const data = await response.json();
+        const { data } = await axios.get('/courseTypes');
         setCourseTypes(data);
       } catch (error) {
         console.error('Ошибка при загрузке courseTypes:', error);
