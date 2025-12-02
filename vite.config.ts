@@ -3,10 +3,11 @@ import { defineConfig } from 'vite';
 import mkcert from 'vite-plugin-mkcert';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import path from 'path';
+// some comment
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/easydev',
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -33,7 +34,7 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
-    minify: 'terser'
+    minify: 'terser',
   },
   publicDir: './public',
   server: {
