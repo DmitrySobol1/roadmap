@@ -26,6 +26,16 @@
   transition: color 0.3s ease;
 }
 
+.card__lessons-qty {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.card--open .card__lessons-qty {
+  color: #000000;
+}
+
 .card__subtitle {
   color: #888888;
   font-size: 14px;

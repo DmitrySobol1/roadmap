@@ -4,14 +4,15 @@ import axios from '@/axios';
 
 import { Page } from '@/components/Page.tsx';
 import { Card } from '@/components/Card/Card.tsx';
-import { Header } from '@/components/Header/Header.tsx';
+import { Header2 } from '@/components/Header2/Header2.tsx';
 import { CardList } from '@/components/CardList/CardList.tsx';
 
 import { TabbarMenu } from '../../components/TabbarMenu/TabbarMenu.tsx';
 import { useUser } from '@/context/UserContext';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
+// import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
+import LockIcon from '@mui/icons-material/Lock';
 import { Alert, Slide, CircularProgress } from '@mui/material';
 
 interface Course {
@@ -82,6 +83,7 @@ export const LessonListPage: FC = () => {
 
   const handleToggle = (id: string) => {
     setOpenAccordion(openAccordion === id ? null : id);
+    setShowAlert(false);
   };
 
   if (loading) {
@@ -121,10 +123,12 @@ export const LessonListPage: FC = () => {
             },
           }}
         >
-          Данный контент доступен на платной подписке
+          Данный контент пока не доступен 
         </Alert>
       </Slide>
-      <Header subtitle={courseName || 'Уроки'} />
+      {/* <Header2 subtitle={courseName || 'Уроки'} /> */}
+      <Header2 subtitle={`Курс «${courseName}»`} />
+
       {lessons.length === 0 ? (
         <p style={{ color: '#888', textAlign: 'center', marginTop: '20px' }}>
           Уроки ещё не добавлены
@@ -141,7 +145,8 @@ export const LessonListPage: FC = () => {
                 text: isAccessible(lesson) ? (
                   <ArrowForwardIcon sx={{ fontSize: 18 }} />
                 ) : (
-                  <CurrencyRubleIcon sx={{ fontSize: 18 }} />
+                  // <CurrencyRubleIcon sx={{ fontSize: 18 }} />
+                  <LockIcon sx={{ fontSize: 18 }} />
                 ),
                 color: isAccessible(lesson) ? badgeColor : '#ff5252',
               }}

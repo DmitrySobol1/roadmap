@@ -16,6 +16,7 @@ interface BadgeProps {
 interface CardProps {
   title: string;
   subtitle?: string;
+  lessonsQty?: number;
   badge?: BadgeProps;
   color?: string;
   onClick?: () => void;
@@ -28,6 +29,7 @@ interface CardProps {
 export const Card: FC<CardProps> = ({
   title,
   subtitle,
+  lessonsQty,
   badge,
   color = '#202020',
   onClick,
@@ -80,6 +82,9 @@ export const Card: FC<CardProps> = ({
       <div className={e('header')}>
         <div className={e('content')}>
           <div className={e('title')}>{title}</div>
+          {lessonsQty !== undefined && (
+            <div className={e('lessons-qty')}>уроков: {lessonsQty}</div>
+          )}
           <div className={`${e('subtitle')} ${isAccordion ? 'card__subtitle--clickable' : ''}`}>
             {subtitle}
             {isAccordion && (
@@ -97,7 +102,7 @@ export const Card: FC<CardProps> = ({
         </div>
         {badge?.isShown && (
           <div
-            className={`${e('badge-wrapper')} ${isAccordion ? 'card__badge-wrapper--clickable' : ''} ${isAccordion && !isPaidContent ? 'card__badge-wrapper--accessible' : ''} ${isAccordion && isPaidContent ? 'card__badge-wrapper--paid' : ''}`}
+            className={`${e('badge-wrapper')} ${onClick ? 'card__badge-wrapper--clickable' : ''} ${onClick && !isPaidContent ? 'card__badge-wrapper--accessible' : ''} ${onClick && isPaidContent ? 'card__badge-wrapper--paid' : ''}`}
             onClick={handleBadgeClick}
           >
             <div

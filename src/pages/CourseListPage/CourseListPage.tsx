@@ -4,14 +4,15 @@ import axios from '@/axios';
 
 import { Page } from '@/components/Page.tsx';
 import { Card } from '@/components/Card/Card.tsx';
-import { Header } from '@/components/Header/Header.tsx';
+import { Header2 } from '@/components/Header2/Header2.tsx';
 import { CardList } from '@/components/CardList/CardList.tsx';
 
 import { TabbarMenu } from '../../components/TabbarMenu/TabbarMenu.tsx';
 import { useUser } from '@/context/UserContext';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
+// import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
+import LockIcon from '@mui/icons-material/Lock';
 import { Alert, Slide, CircularProgress } from '@mui/material';
 
 interface CourseType {
@@ -28,6 +29,7 @@ interface Course {
   access: 'free' | 'payment';
   orderNumber: number;
   type: CourseType;
+  lessonsQty?: number;
 }
 
 interface LocationState {
@@ -69,6 +71,7 @@ export const CourseListPage: FC = () => {
 
   const handleToggle = (id: string) => {
     setOpenAccordion(openAccordion === id ? null : id);
+    setShowAlert(false);
   };
 
   const handleCourseClick = (course: Course) => {
@@ -120,10 +123,11 @@ export const CourseListPage: FC = () => {
             },
           }}
         >
-          Данный контент доступен на платной подписке
+          Данный контент пока не доступен
         </Alert>
       </Slide>
-      <Header subtitle={courseTypeName || 'Уроки'} />
+      {/* <Header subtitle={courseTypeName || 'Уроки'} /> */}
+      <Header2 title={`Курсы по «${courseTypeName}»`} />
       {courses.length === 0 ? (
         <p style={{ color: '#888', textAlign: 'center', marginTop: '20px' }}>
           Уроки ещё не добавлены
@@ -134,20 +138,27 @@ export const CourseListPage: FC = () => {
             <Card
               key={course._id}
               title={course.name}
+              lessonsQty={course.lessonsQty}
               subtitle={course.shortDescription || ''}
               badge={{
                 isShown: true,
                 text: isAccessible(course) ? (
                   <ArrowForwardIcon sx={{ fontSize: 18 }} />
                 ) : (
-                  <CurrencyRubleIcon sx={{ fontSize: 18 }} />
+                  // <CurrencyRubleIcon sx={{ fontSize: 18 }} />
+
+                  <LockIcon sx={{ fontSize: 18 }} />
                 ),
                 color: isAccessible(course)
                   ? course.type?.color || '#c8e6c9'
                   : '#ff5252',
               }}
               isAccordion={true}
-              accordionContent={<p style={{ whiteSpace: 'pre-line' }}>{course.longDescription}</p>}
+              accordionContent={
+                <p style={{ whiteSpace: 'pre-line' }}>
+                  {course.longDescription}
+                </p>
+              }
               isOpen={openAccordion === course._id}
               onToggle={() => handleToggle(course._id)}
               onClick={() => handleCourseClick(course)}
