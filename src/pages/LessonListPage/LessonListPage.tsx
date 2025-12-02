@@ -84,7 +84,8 @@ export const LessonListPage: FC = () => {
   };
 
   return (
-    <Page back={true}>
+    <Page back={true} >
+      <div style={{ marginBottom: 100}}>
       <Slide direction="down" in={showAlert} mountOnEnter unmountOnExit>
         <Alert
           severity="error"
@@ -135,7 +136,7 @@ export const LessonListPage: FC = () => {
           ))}
         </CardList>
       )}
-
+</div>
       <TabbarMenu />
     </Page>
   );
