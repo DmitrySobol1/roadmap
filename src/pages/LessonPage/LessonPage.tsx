@@ -1,36 +1,30 @@
 import { useState, useEffect, type FC } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from '@/axios';
 import { CircularProgress } from '@mui/material';
 
 import { Page } from '@/components/Page.tsx';
-import { Header } from '@/components/Header/Header.tsx';
+import { Header2 } from '@/components/Header2/Header2.tsx';
+import { Text } from '@/components/Text/Text.tsx';
 
 import { TabbarMenu } from '../../components/TabbarMenu/TabbarMenu.tsx';
-
-interface LocationState {
-  lessonName?: string;
-  urlToFile?: string;
-}
 
 interface Lesson {
   _id: string;
   name: string;
   urlToFile?: string;
   longDescription?: string;
+  text1?: string;
+  text2?: string;
+  homework?: string;
 }
 
 export const LessonPage: FC = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
-  const location = useLocation();
-  const state = location.state as LocationState;
 
   const [lesson, setLesson] = useState<Lesson | null>(null);
-  const [loading, setLoading] = useState(!state?.urlToFile);
+  const [loading, setLoading] = useState(true);
   const [videoLoading, setVideoLoading] = useState(true);
-
-  const lessonName = state?.lessonName || lesson?.name || '';
-  const videoUrl = state?.urlToFile || lesson?.urlToFile || '';
 
   useEffect(() => {
     const fetchLesson = async () => {
@@ -46,10 +40,10 @@ export const LessonPage: FC = () => {
       }
     };
 
-    if (lessonId && !state?.urlToFile) {
+    if (lessonId) {
       fetchLesson();
     }
-  }, [lessonId, state?.urlToFile]);
+  }, [lessonId]);
 
   if (loading) {
     return (
@@ -70,11 +64,15 @@ export const LessonPage: FC = () => {
 
   return (
     <Page back={true}>
-      <Header subtitle={lessonName || 'Урок'} />
+      <div style={{ marginBottom: 100}}>
+      <Header2 subtitle={lesson?.name || 'Урок'} />
 
-      {videoUrl ? (
+      <Text text={lesson?.text1} />
+      <Text text={lesson?.text2} />
+
+      {lesson?.urlToFile ? (
         <div
-          style={{ position: 'relative', paddingTop: '53.91%', width: '100%' }}
+          style={{ position: 'relative', paddingTop: '53.91%', width: '95%', margin: '0 auto' }}
         >
           {videoLoading && (
             <div
@@ -94,7 +92,7 @@ export const LessonPage: FC = () => {
             </div>
           )}
           <iframe
-            src={videoUrl}
+            src={lesson.urlToFile}
             allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;"
             frameBorder="0"
             allowFullScreen
@@ -114,12 +112,13 @@ export const LessonPage: FC = () => {
         </p>
       )}
 
-      {lesson?.longDescription && (
-        <p style={{ padding: '16px', color: '#666', whiteSpace: 'pre-line' }}>
-          {lesson.longDescription}
+      {lesson?.homework && (
+        <p >
+          <Text hometext='Задание:' />
+          <Text hometext={lesson?.homework} />
         </p>
       )}
-
+</div>
       <TabbarMenu />
     </Page>
   );

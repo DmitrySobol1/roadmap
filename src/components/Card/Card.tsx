@@ -4,6 +4,7 @@ import { bem } from '@/css/bem.ts';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import './Card.css';
 
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const [b, e] = bem('card');
 
 interface BadgeProps {
@@ -79,7 +80,7 @@ export const Card: FC<CardProps> = ({
       <div className={e('header')}>
         <div className={e('content')}>
           <div className={e('title')}>{title}</div>
-          <div className={e('subtitle')}>
+          <div className={`${e('subtitle')} ${isAccordion ? 'card__subtitle--clickable' : ''}`}>
             {subtitle}
             {isAccordion && (
               <KeyboardArrowDownIcon
@@ -96,7 +97,7 @@ export const Card: FC<CardProps> = ({
         </div>
         {badge?.isShown && (
           <div
-            className={`${e('badge-wrapper')} ${isAccordion ? 'card__badge-wrapper--clickable' : ''}`}
+            className={`${e('badge-wrapper')} ${isAccordion ? 'card__badge-wrapper--clickable' : ''} ${isAccordion && !isPaidContent ? 'card__badge-wrapper--accessible' : ''} ${isAccordion && isPaidContent ? 'card__badge-wrapper--paid' : ''}`}
             onClick={handleBadgeClick}
           >
             <div
@@ -117,7 +118,7 @@ export const Card: FC<CardProps> = ({
                 className={`${e('open-button')} ${isPaidContent ? 'card__open-button--paid' : ''}`}
                 onClick={handleBadgeClick}
               >
-                Открыть
+                Открыть {!isPaidContent && <ArrowForwardIcon sx={{ fontSize: 18 }} />}
               </button>
             )}
           </div>

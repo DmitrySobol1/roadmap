@@ -1,0 +1,18 @@
+.header2 {
+  text-align: left;
+  padding: 54px 16px 20px;
+}
+
+.header__title2 {
+  color: #4ade80;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.header__subtitle2 {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 8px 0 0;
+}

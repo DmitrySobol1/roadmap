@@ -1,0 +1,20 @@
+.text {
+  text-align: left;
+  padding: 5px 16px 20px;
+}
+
+.text__text {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 300;
+  margin: 8px 0 0;
+  white-space: pre-line;
+}
+
+.text__hometext {
+  color: #fefefe;
+  font-size: 16px;
+  font-weight: 300;
+  margin: 8px 0 0;
+  white-space: pre-line;
+}

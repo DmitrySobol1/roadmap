@@ -54,11 +54,8 @@ export const LessonListPage: FC = () => {
 
   const handleLessonClick = (lesson: Lesson) => {
     if (isAccessible(lesson)) {
-      navigate(`/lesson/${lesson._id}`, {
-        state: { lessonName: lesson.name, urlToFile: lesson.urlToFile },
-      });
+      navigate(`/lesson/${lesson._id}`);
     } else {
-      console.log('нет доступа');
       setShowAlert(true);
     }
   };
@@ -68,6 +65,7 @@ export const LessonListPage: FC = () => {
       try {
         const { data } = await axios.get(`/lessons/${courseId}`);
         if (Array.isArray(data)) {
+          console.log('lessons', data)
           setLessons(data);
         }
       } catch (error) {
@@ -137,7 +135,7 @@ export const LessonListPage: FC = () => {
             <Card
               key={lesson._id}
               title={lesson.name}
-              //   subtitle={lesson.shortDescription || ''}
+              subtitle={lesson.shortDescription || ''}
               badge={{
                 isShown: true,
                 text: isAccessible(lesson) ? (
@@ -147,7 +145,7 @@ export const LessonListPage: FC = () => {
                 ),
                 color: isAccessible(lesson) ? badgeColor : '#ff5252',
               }}
-              isAccordion={false}
+              isAccordion={true}
               accordionContent={<p style={{ whiteSpace: 'pre-line' }}>{lesson.longDescription}</p>}
               isOpen={openAccordion === lesson._id}
               onToggle={() => handleToggle(lesson._id)}
