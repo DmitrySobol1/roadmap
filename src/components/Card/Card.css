@@ -33,6 +33,7 @@
   align-items: center;
   gap: 8px;
   transition: color 0.3s ease;
+  /* text-decoration: underline dashed #ffffff; */
   /* max-width: 90%; */
 }
 
@@ -45,14 +46,21 @@
 }
 
 .card__arrow {
-  color: #4ade80;
-  font-size: 12px;
-  transition: transform 0.3s ease;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
 }
 
-.card--open .card__arrow {
-  transform: rotate(90deg);
+.card__badge-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  margin: -8px;
+  flex-shrink: 0;
+}
+
+.card__badge-wrapper--clickable {
+  cursor: pointer;
 }
 
 .card__badge {
@@ -63,7 +71,6 @@
   height: 28px;
   min-width: 28px;
   min-height: 28px;
-  flex-shrink: 0;
   border-radius: 50%;
   font-size: 14px;
   font-weight: 600;
@@ -111,6 +118,41 @@
 .card--open .card__subtitle {
   color: #666666;
   font-weight: 500;
+}
+
+.card__open-button {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 12px;
+  background-color: #4ade80;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.card__open-button:hover {
+  background-color: #3ecf70;
+}
+
+.card__open-button:active {
+  background-color: #35b862;
+}
+
+.card__open-button--paid {
+  background-color: #ff5252;
+}
+
+.card__open-button--paid:hover {
+  background-color: #e64a4a;
+}
+
+.card__open-button--paid:active {
+  background-color: #d44242;
 }
 
 .card--open .card__subtitle--clickable:hover {

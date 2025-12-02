@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import { useState } from 'react';
 import { bem } from '@/css/bem.ts';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import './Card.css';
 
 const [b, e] = bem('card');
@@ -39,40 +40,71 @@ export const Card: FC<CardProps> = ({
   const isControlled = isOpenControlled !== undefined;
   const isOpen = isControlled ? isOpenControlled : isOpenInternal;
 
-  const handleSubtitleClick = (e: React.MouseEvent) => {
-    if (isAccordion) {
-      e.stopPropagation();
-      if (isControlled && onToggle) {
-        onToggle();
-      } else {
-        setIsOpenInternal(!isOpenInternal);
-      }
+  const handleToggleAccordion = () => {
+    if (isControlled && onToggle) {
+      onToggle();
+    } else {
+      setIsOpenInternal(!isOpenInternal);
     }
   };
+
+  const handleCardClick = () => {
+    if (isAccordion) {
+      handleToggleAccordion();
+    } else if (onClick) {
+      onClick();
+    }
+  };
+
+  const handleBadgeClick = (e: React.MouseEvent) => {
+    if (isAccordion && onClick) {
+      e.stopPropagation();
+      onClick();
+    }
+  };
+
+  const isPaidContent = badge?.color === '#ff5252';
+  const badgeBackgroundColor = isPaidContent
+    ? '#ff5252'
+    : isOpen && isAccordion
+      ? '#4ade80'
+      : (badge?.color || '#c8e6c9');
 
   return (
     <div
       className={`${b()} ${isOpen ? 'card--open' : ''}`}
-      style={{ backgroundColor: color, cursor: onClick ? 'pointer' : 'default' }}
-      onClick={onClick}
+      style={{ backgroundColor: color, cursor: 'pointer' }}
+      onClick={handleCardClick}
     >
       <div className={e('header')}>
         <div className={e('content')}>
           <div className={e('title')}>{title}</div>
-          <div
-            className={`${e('subtitle')} ${isAccordion ? 'card__subtitle--clickable' : ''}`}
-            onClick={handleSubtitleClick}
-          >
+          <div className={e('subtitle')}>
             {subtitle}
-            {isAccordion && <span className={e('arrow')}>{isOpen ? '∨' : '>'}</span>}
+            {isAccordion && (
+              <KeyboardArrowDownIcon
+                className={e('arrow')}
+                sx={{
+                  fontSize: 20,
+                  transition: 'transform 0.3s ease, color 0.3s ease',
+                  transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  color: isOpen ? '#000000' : '#4ade80',
+                }}
+              />
+            )}
           </div>
         </div>
         {badge?.isShown && (
           <div
-            className={e('badge')}
-            style={{ backgroundColor: badge.color || '#c8e6c9' }}
+            className={`${e('badge-wrapper')} ${isAccordion ? 'card__badge-wrapper--clickable' : ''}`}
+            onClick={handleBadgeClick}
           >
-            {badge.text}
+            <div
+              className={e('badge')}
+              style={{ backgroundColor: badgeBackgroundColor }}
+            >
+              {badge.text}
+            </div>
           </div>
         )}
       </div>
@@ -80,6 +112,14 @@ export const Card: FC<CardProps> = ({
         <div className={`${e('accordion-content')} ${isOpen ? 'card__accordion-content--open' : ''}`}>
           <div className={e('accordion-inner')}>
             {accordionContent}
+            {onClick && (
+              <button
+                className={`${e('open-button')} ${isPaidContent ? 'card__open-button--paid' : ''}`}
+                onClick={handleBadgeClick}
+              >
+                Открыть
+              </button>
+            )}
           </div>
         </div>
       )}
