@@ -1,0 +1,118 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  padding: 16px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card__title {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.card__subtitle {
+  color: #888888;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+  /* max-width: 90%; */
+}
+
+.card__subtitle--clickable {
+  cursor: pointer;
+}
+
+.card__subtitle--clickable:hover {
+  color: #aaaaaa;
+}
+
+.card__arrow {
+  color: #4ade80;
+  font-size: 12px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.card--open .card__arrow {
+  transform: rotate(90deg);
+}
+
+.card__badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Аккордеон контент с анимацией */
+.card__accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+  overflow: hidden;
+}
+
+.card__accordion-content--open {
+  grid-template-rows: 1fr;
+}
+
+.card__accordion-inner {
+  overflow: hidden;
+  padding-top: 0;
+  border-top: 1px solid transparent;
+  color: #000000;
+  font-size: 14px;
+  font-weight: 500;
+  transition: padding-top 0.3s ease, border-color 0.3s ease;
+}
+
+.card__accordion-content--open .card__accordion-inner {
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid #dddddd;
+}
+
+/* Открытый аккордеон - белый фон */
+.card--open {
+  background-color: #ffffff !important;
+}
+
+.card--open .card__title {
+  color: #000000;
+  font-weight: 500;
+}
+
+.card--open .card__subtitle {
+  color: #666666;
+  font-weight: 500;
+}
+
+.card--open .card__subtitle--clickable:hover {
+  color: #444444;
+}

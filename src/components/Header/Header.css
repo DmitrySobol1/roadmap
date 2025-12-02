@@ -1,0 +1,18 @@
+.header {
+  text-align: left;
+  padding: 54px 16px 70px;
+}
+
+.header__title {
+  color: #4ade80;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.header__subtitle {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 8px 0 0;
+}
