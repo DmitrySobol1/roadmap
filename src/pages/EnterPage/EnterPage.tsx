@@ -1,4 +1,5 @@
-import { Section, List, Spinner } from '@telegram-apps/telegram-ui';
+import { Section, List } from '@telegram-apps/telegram-ui';
+import { CircularProgress } from '@mui/material';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -61,12 +62,13 @@ setIsPayed(isPayed || false);
       {isLoading && (
         <div
           style={{
-            textAlign: 'center',
+            display: 'flex',
             justifyContent: 'center',
-            padding: '100px',
+            alignItems: 'center',
+            height: '50vh',
           }}
         >
-          <Spinner size="m" />
+          <CircularProgress sx={{ color: '#4ade80' }} />
         </div>
       )}
 

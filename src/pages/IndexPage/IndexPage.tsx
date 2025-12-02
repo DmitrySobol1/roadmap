@@ -1,6 +1,7 @@
 import { useState, useEffect, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '@/axios';
+import { CircularProgress } from '@mui/material';
 
 import { Page } from '@/components/Page.tsx';
 import { Card } from '@/components/Card/Card.tsx';
@@ -22,6 +23,7 @@ interface CourseType {
 export const IndexPage: FC = () => {
   const navigate = useNavigate();
   const [courseTypes, setCourseTypes] = useState<CourseType[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCourseTypes = async () => {
@@ -30,11 +32,30 @@ export const IndexPage: FC = () => {
         setCourseTypes(data);
       } catch (error) {
         console.error('Ошибка при загрузке courseTypes:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCourseTypes();
   }, []);
+
+  if (loading) {
+    return (
+      <Page back={false}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '50vh',
+          }}
+        >
+          <CircularProgress sx={{ color: '#4ade80' }} />
+        </div>
+      </Page>
+    );
+  }
 
   return (
     <Page back={false}>

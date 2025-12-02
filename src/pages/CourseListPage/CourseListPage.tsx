@@ -12,7 +12,7 @@ import { useUser } from '@/context/UserContext';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
-import { Alert, Slide } from '@mui/material';
+import { Alert, Slide, CircularProgress } from '@mui/material';
 
 interface CourseType {
   _id: string;
@@ -44,6 +44,7 @@ export const CourseListPage: FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
 
   const courseTypeName = state?.courseTypeName || courses[0]?.type?.name || '';
 
@@ -56,6 +57,8 @@ export const CourseListPage: FC = () => {
         }
       } catch (error) {
         console.error('Ошибка при загрузке courses:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -80,6 +83,23 @@ export const CourseListPage: FC = () => {
   };
 
   const isAccessible = (course: Course) => isPayed || course.access === 'free';
+
+  if (loading) {
+    return (
+      <Page back={true}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '50vh',
+          }}
+        >
+          <CircularProgress sx={{ color: '#4ade80' }} />
+        </div>
+      </Page>
+    );
+  }
 
   return (
     <Page back={true}>
@@ -127,7 +147,7 @@ export const CourseListPage: FC = () => {
                   : '#ff5252',
               }}
               isAccordion={true}
-              accordionContent={<p>{course.longDescription}</p>}
+              accordionContent={<p style={{ whiteSpace: 'pre-line' }}>{course.longDescription}</p>}
               isOpen={openAccordion === course._id}
               onToggle={() => handleToggle(course._id)}
               onClick={() => handleCourseClick(course)}
