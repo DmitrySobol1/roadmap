@@ -5,6 +5,7 @@ import axios from '@/axios';
 import { Page } from '@/components/Page.tsx';
 import { Card } from '@/components/Card/Card.tsx';
 import { Header2 } from '@/components/Header2/Header2.tsx';
+import { Text } from '@/components/Text/Text.tsx';
 import { CardList } from '@/components/CardList/CardList.tsx';
 
 import { TabbarMenu } from '../../components/TabbarMenu/TabbarMenu.tsx';
@@ -109,7 +110,9 @@ export const CourseListPage: FC = () => {
     <Page back={true}>
       <AlertMessage show={showAlert} />
       {/* <Header subtitle={courseTypeName || 'Уроки'} /> */}
-      <Header2 title={`Курсы по «${courseTypeName}»`} />
+      <Header2 title={`Модуль по «${courseTypeName}»`} />
+      <Text text='Список обучалок:'/>
+      {/* <Header2 subtitle='Список обучалок:' /> */}
       {courses.length === 0 ? (
         <p style={{ color: '#888', textAlign: 'center', marginTop: '20px' }}>
           Уроки ещё не добавлены

@@ -59,7 +59,7 @@ export const IndexPage: FC = () => {
 
   return (
     <Page back={false}>
-      <Header title="Easy dev App" subtitle="про разработку для «не кодеров»" />
+      <Header title="Easy dev" subtitle="про разработку для «не кодеров»" />
       <CardList>
         {courseTypes.map((item) => (
           <Card

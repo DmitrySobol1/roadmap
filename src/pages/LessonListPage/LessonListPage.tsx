@@ -5,6 +5,7 @@ import axios from '@/axios';
 import { Page } from '@/components/Page.tsx';
 import { Card } from '@/components/Card/Card.tsx';
 import { Header2 } from '@/components/Header2/Header2.tsx';
+import { Text } from '@/components/Text/Text.tsx';
 import { CardList } from '@/components/CardList/CardList.tsx';
 
 import { TabbarMenu } from '../../components/TabbarMenu/TabbarMenu.tsx';
@@ -144,7 +145,8 @@ export const LessonListPage: FC = () => {
       <div style={{ marginBottom: 100}}>
       <AlertMessage show={showAlert} />
       {/* <Header2 subtitle={courseName || 'Уроки'} /> */}
-      <Header2 subtitle={`Курс «${courseName}»`} />
+      <Header2 subtitle={`Обучалка «${courseName}»`} />
+      <Text text='Список уроков:'/>
 
       {lessons.length === 0 ? (
         <p style={{ color: '#888', textAlign: 'center', marginTop: '20px' }}>
