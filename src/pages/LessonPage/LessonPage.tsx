@@ -2,11 +2,15 @@ import { useState, useEffect, type FC } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from '@/axios';
 import { CircularProgress, Checkbox, Button } from '@mui/material';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
 
 import { Page } from '@/components/Page.tsx';
 import { Header2 } from '@/components/Header2/Header2.tsx';
 import { Text } from '@/components/Text/Text.tsx';
 import { useTlgid } from '@/components/Tlgid.tsx';
+import { useUser } from '@/context/UserContext';
+import { AlertMessage } from '@/components/AlertMessage/AlertMessage.tsx';
 
 import { TabbarMenu } from '../../components/TabbarMenu/TabbarMenu.tsx';
 
@@ -25,18 +29,24 @@ interface Lesson {
   homework?: string;
   numberInListLessons?: number;
   linkToCourse?: Course;
+  access?: 'free' | 'payment';
 }
 
 export const LessonPage: FC = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
   const navigate = useNavigate();
   const tlgid = useTlgid();
+  const { isPayed } = useUser();
 
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [loading, setLoading] = useState(true);
   const [videoLoading, setVideoLoading] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
-  const [nextLessonId, setNextLessonId] = useState<string | null>(null);
+  const [nextLesson, setNextLesson] = useState<Lesson | null>(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+
+  const isNextLessonAccessible = isPayed || nextLesson?.access === 'free';
 
   useEffect(() => {
     const fetchLesson = async () => {
@@ -49,11 +59,11 @@ export const LessonPage: FC = () => {
           if (data.linkToCourse?._id && data.numberInListLessons !== undefined) {
             const lessonsResponse = await axios.get(`/lessons/${data.linkToCourse._id}`);
             const lessons = lessonsResponse.data;
-            const nextLesson = lessons.find(
+            const foundNextLesson = lessons.find(
               (l: Lesson) => l.numberInListLessons === data.numberInListLessons + 1
             );
-            if (nextLesson) {
-              setNextLessonId(nextLesson._id);
+            if (foundNextLesson) {
+              setNextLesson(foundNextLesson);
             }
           }
 
@@ -61,6 +71,10 @@ export const LessonPage: FC = () => {
           if (tlgid) {
             const progressResponse = await axios.get(`/progress/${tlgid}/${lessonId}`);
             setIsChecked(progressResponse.data.isLearned || false);
+
+            // Получаем избранное
+            const favoriteResponse = await axios.get(`/favorite/${tlgid}/${lessonId}`);
+            setIsFavorite(favoriteResponse.data.isFavorite || false);
           }
         }
       } catch (error) {
@@ -72,7 +86,9 @@ export const LessonPage: FC = () => {
 
     if (lessonId) {
       setIsChecked(false);
-      setNextLessonId(null);
+      setNextLesson(null);
+      setIsFavorite(false);
+      setShowAlert(false);
       fetchLesson();
     }
   }, [lessonId, tlgid]);
@@ -95,6 +111,24 @@ export const LessonPage: FC = () => {
     }
   };
 
+  // Обработка изменения избранного
+  const handleFavoriteChange = async (checked: boolean) => {
+    setIsFavorite(checked);
+
+    if (!tlgid || !lessonId) return;
+
+    try {
+      if (checked) {
+        await axios.post('/favorite', { tlgid, lessonId });
+      } else {
+        await axios.delete(`/favorite/${tlgid}/${lessonId}`);
+      }
+    } catch (error) {
+      console.error('Ошибка при сохранении избранного:', error);
+      setIsFavorite(!checked); // Откатываем при ошибке
+    }
+  };
+
   if (loading) {
     return (
       <Page back={true}>
@@ -114,6 +148,7 @@ export const LessonPage: FC = () => {
 
   return (
     <Page back={true}>
+      <AlertMessage show={showAlert} message="Следующий урок пока не доступен" />
       <div style={{ marginBottom: 100}}>
       <Header2 subtitle={lesson?.name || 'Урок'} />
 
@@ -169,6 +204,28 @@ export const LessonPage: FC = () => {
         </p>
       )}
 
+      {/* добавить в избранное */}
+      <div style={{ padding: '0 16px' }}>
+        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+          <Checkbox
+            checked={isFavorite}
+            onChange={(e) => handleFavoriteChange(e.target.checked)}
+            icon={<FavoriteBorder />}
+            checkedIcon={<Favorite />}
+            sx={{
+              color: '#666',
+              '&.Mui-checked': {
+                color: '#ff5252',
+              },
+            }}
+          />
+          <span style={{ color: isFavorite ? '#4ade80' : '#666' }}>
+            {isFavorite ? 'В избранном' : 'Добавить в избранное'}
+          </span>
+        </label>
+      </div>
+
+
       {/* Checkbox и кнопка следующего урока */}
       <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
         <label style={{ display: 'flex', alignItems: 'center', color: '#fff', cursor: 'pointer' }}>
@@ -184,17 +241,23 @@ export const LessonPage: FC = () => {
           />
           <span style={{ color: isChecked ? '#4ade80' : '#666' }}>Урок пройден</span>
         </label>
-        {nextLessonId && (
+        {nextLesson && (
           <Button
             variant="contained"
             disabled={!isChecked}
-            onClick={() => navigate(`/lesson/${nextLessonId}`)}
+            onClick={() => {
+              if (isNextLessonAccessible) {
+                navigate(`/lesson/${nextLesson._id}`);
+              } else {
+                setShowAlert(true);
+              }
+            }}
             sx={{
-              backgroundColor: '#4ade80',
-              color: '#000',
+              backgroundColor: isNextLessonAccessible ? '#4ade80' : '#ff5252',
+              color: isNextLessonAccessible ? '#000' : '#fff',
               fontWeight: 500,
               '&:hover': {
-                backgroundColor: '#3ecf70',
+                backgroundColor: isNextLessonAccessible ? '#3ecf70' : '#e04848',
               },
               '&.Mui-disabled': {
                 backgroundColor: '#2a2a2a',

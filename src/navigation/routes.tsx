@@ -7,6 +7,7 @@ import { CourseListPage } from '@/pages/CourseListPage/CourseListPage';
 import { LessonListPage } from '@/pages/LessonListPage/LessonListPage';
 import { LessonPage } from '@/pages/LessonPage/LessonPage';
 import { MyAccountMainPage } from '@/pages/MyAccount/MyAccountMainPage';
+import { FavoritesLessonsPage } from '@/pages/FavoritesLessons/FavoritesLessons';
 
 
 interface Route {
@@ -24,4 +25,5 @@ export const routes: Route[] = [
   { path: '/lessons/:courseId', Component: LessonListPage },
   { path: '/lesson/:lessonId', Component: LessonPage },
   { path: '/myaccount-main_page', Component: MyAccountMainPage },
+  { path: '/favorites-lessons_page', Component: FavoritesLessonsPage },
 ];

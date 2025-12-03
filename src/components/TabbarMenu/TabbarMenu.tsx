@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 
 import PersonIcon from '@mui/icons-material/Person';
 import GridViewIcon from '@mui/icons-material/GridView';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { ROUTES } from '@/constants/routes.ts';
 import './TabbarMenu.css';
@@ -15,7 +16,8 @@ export const TabbarMenu: FC = () => {
   const tabs = useMemo(
     () => [
       { id: 1, Icon: GridViewIcon, path: ROUTES.INDEX },
-      { id: 2, Icon: PersonIcon, path: ROUTES.MY_ACCOUNT },
+      { id: 2, Icon: FavoriteIcon, path: ROUTES.FAVORITES_LESSONS },
+      { id: 3, Icon: PersonIcon, path: ROUTES.MY_ACCOUNT },
     ],
     []
   );

@@ -5,6 +5,7 @@ export const ROUTES = {
   ONBOARDING: '/onboarding',
   INDEX: '/index',
   MY_ACCOUNT: '/myaccount-main_page',
+  FAVORITES_LESSONS: '/favorites-lessons_page'
 
   
 } as const;

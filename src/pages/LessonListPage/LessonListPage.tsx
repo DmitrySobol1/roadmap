@@ -9,11 +9,13 @@ import { CardList } from '@/components/CardList/CardList.tsx';
 
 import { TabbarMenu } from '../../components/TabbarMenu/TabbarMenu.tsx';
 import { useUser } from '@/context/UserContext';
+import { useTlgid } from '@/components/Tlgid.tsx';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 // import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
 import LockIcon from '@mui/icons-material/Lock';
-import { Alert, Slide, CircularProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
+import { AlertMessage } from '@/components/AlertMessage/AlertMessage.tsx';
 
 interface Course {
   _id: string;
@@ -42,11 +44,14 @@ export const LessonListPage: FC = () => {
   const navigate = useNavigate();
   const state = location.state as LocationState;
   const { isPayed } = useUser();
+  const tlgid = useTlgid();
 
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [loading, setLoading] = useState(true);
+  const [learnedLessonIds, setLearnedLessonIds] = useState<string[]>([]);
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
 
   const courseName = state?.courseName || lessons[0]?.linkToCourse?.name || '';
   const badgeColor = state?.color || '#c8e6c9';
@@ -69,6 +74,17 @@ export const LessonListPage: FC = () => {
           console.log('lessons', data)
           setLessons(data);
         }
+
+        // Получаем прогресс пользователя
+        if (tlgid && courseId) {
+          const progressResponse = await axios.get(`/progress/${tlgid}/course/${courseId}`);
+          setLearnedLessonIds(progressResponse.data.learnedLessonIds || []);
+
+          // Получаем избранные уроки пользователя
+          const favoritesResponse = await axios.get(`/favorites/${tlgid}`);
+          const favIds = favoritesResponse.data.map((f: { _id: string }) => f._id);
+          setFavoriteIds(favIds);
+        }
       } catch (error) {
         console.error('Ошибка при загрузке lessons:', error);
       } finally {
@@ -79,11 +95,31 @@ export const LessonListPage: FC = () => {
     if (courseId) {
       fetchLessons();
     }
-  }, [courseId]);
+  }, [courseId, tlgid]);
 
   const handleToggle = (id: string) => {
     setOpenAccordion(openAccordion === id ? null : id);
     setShowAlert(false);
+  };
+
+  const handleFavoriteAdd = async (lessonId: string) => {
+    if (!tlgid) return;
+    try {
+      await axios.post('/favorite', { lessonId, tlgid });
+      setFavoriteIds((prev) => [...prev, lessonId]);
+    } catch (error) {
+      console.error('Ошибка при добавлении в избранное:', error);
+    }
+  };
+
+  const handleFavoriteRemove = async (lessonId: string) => {
+    if (!tlgid) return;
+    try {
+      await axios.delete(`/favorite/${tlgid}/${lessonId}`);
+      setFavoriteIds((prev) => prev.filter((id) => id !== lessonId));
+    } catch (error) {
+      console.error('Ошибка при удалении из избранного:', error);
+    }
   };
 
   if (loading) {
@@ -106,26 +142,7 @@ export const LessonListPage: FC = () => {
   return (
     <Page back={true} >
       <div style={{ marginBottom: 100}}>
-      <Slide direction="down" in={showAlert} mountOnEnter unmountOnExit>
-        <Alert
-          severity="error"
-          sx={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 1000,
-            borderRadius: 0,
-            backgroundColor: '#ff5252', // кастомный фон
-            color: '#fff', // цвет текста
-            '& .MuiAlert-icon': {
-              color: '#fff', // цвет иконки
-            },
-          }}
-        >
-          Данный контент пока не доступен 
-        </Alert>
-      </Slide>
+      <AlertMessage show={showAlert} />
       {/* <Header2 subtitle={courseName || 'Уроки'} /> */}
       <Header2 subtitle={`Курс «${courseName}»`} />
 
@@ -138,6 +155,7 @@ export const LessonListPage: FC = () => {
           {lessons.map((lesson) => (
             <Card
               key={lesson._id}
+              isLearned={learnedLessonIds.includes(lesson._id)}
               title={lesson.name}
               subtitle={lesson.shortDescription || ''}
               badge={{
@@ -155,6 +173,9 @@ export const LessonListPage: FC = () => {
               isOpen={openAccordion === lesson._id}
               onToggle={() => handleToggle(lesson._id)}
               onClick={() => handleLessonClick(lesson)}
+              isFavorite={favoriteIds.includes(lesson._id)}
+              onFavoriteAdd={() => handleFavoriteAdd(lesson._id)}
+              onFavoriteRemove={() => handleFavoriteRemove(lesson._id)}
             />
           ))}
         </CardList>

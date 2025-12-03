@@ -13,7 +13,8 @@ import { useUser } from '@/context/UserContext';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 // import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
 import LockIcon from '@mui/icons-material/Lock';
-import { Alert, Slide, CircularProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
+import { AlertMessage } from '@/components/AlertMessage/AlertMessage.tsx';
 
 interface CourseType {
   _id: string;
@@ -106,26 +107,7 @@ export const CourseListPage: FC = () => {
 
   return (
     <Page back={true}>
-      <Slide direction="down" in={showAlert} mountOnEnter unmountOnExit>
-        <Alert
-          severity="error"
-          sx={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 1000,
-            borderRadius: 0,
-            backgroundColor: '#ff5252', // кастомный фон
-            color: '#fff', // цвет текста
-            '& .MuiAlert-icon': {
-              color: '#fff', // цвет иконки
-            },
-          }}
-        >
-          Данный контент пока не доступен
-        </Alert>
-      </Slide>
+      <AlertMessage show={showAlert} />
       {/* <Header subtitle={courseTypeName || 'Уроки'} /> */}
       <Header2 title={`Курсы по «${courseTypeName}»`} />
       {courses.length === 0 ? (

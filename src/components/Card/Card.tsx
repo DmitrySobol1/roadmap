@@ -2,6 +2,10 @@ import type { FC, ReactNode } from 'react';
 import { useState } from 'react';
 import { bem } from '@/css/bem.ts';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import  { Checkbox } from '@mui/material';
+import Favorite from '@mui/icons-material/Favorite';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+
 import './Card.css';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -17,6 +21,7 @@ interface CardProps {
   title: string;
   subtitle?: string;
   lessonsQty?: number;
+  isLearned?: boolean;
   badge?: BadgeProps;
   color?: string;
   onClick?: () => void;
@@ -24,12 +29,16 @@ interface CardProps {
   accordionContent?: ReactNode;
   isOpen?: boolean;
   onToggle?: () => void;
+  isFavorite?: boolean;
+  onFavoriteAdd?: () => void;
+  onFavoriteRemove?: () => void;
 }
 
 export const Card: FC<CardProps> = ({
   title,
   subtitle,
   lessonsQty,
+  isLearned,
   badge,
   color = '#202020',
   onClick,
@@ -37,6 +46,9 @@ export const Card: FC<CardProps> = ({
   accordionContent,
   isOpen: isOpenControlled,
   onToggle,
+  isFavorite,
+  onFavoriteAdd,
+  onFavoriteRemove,
 }) => {
   const [isOpenInternal, setIsOpenInternal] = useState(false);
 
@@ -66,6 +78,15 @@ export const Card: FC<CardProps> = ({
     }
   };
 
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isFavorite && onFavoriteRemove) {
+      onFavoriteRemove();
+    } else if (!isFavorite && onFavoriteAdd) {
+      onFavoriteAdd();
+    }
+  };
+
   const isPaidContent = badge?.color === '#ff5252';
   const badgeBackgroundColor = isPaidContent
     ? '#ff5252'
@@ -81,7 +102,25 @@ export const Card: FC<CardProps> = ({
     >
       <div className={e('header')}>
         <div className={e('content')}>
-          <div className={e('title')}>{title}</div>
+          <div className={e('title')}>
+            {isLearned && (
+              <Checkbox
+                checked={true}
+                disabled
+                sx={{
+                  padding: 0,
+                  marginRight: '6px',
+                  '&.Mui-checked': {
+                    color: '#4ade80',
+                  },
+                  '&.Mui-disabled': {
+                    color: '#4ade80',
+                  },
+                }}
+              />
+            )}
+            {title}
+          </div>
           {lessonsQty !== undefined && (
             <div className={e('lessons-qty')}>уроков: {lessonsQty}</div>
           )}
@@ -99,6 +138,11 @@ export const Card: FC<CardProps> = ({
               />
             )}
           </div>
+          {isFavorite && !isOpen && (
+            <div className={e('favorite-indicator')}>
+              <Favorite sx={{ fontSize: 16, color: '#ff5252' }} />
+            </div>
+          )}
         </div>
         {badge?.isShown && (
           <div
@@ -125,6 +169,26 @@ export const Card: FC<CardProps> = ({
               >
                 Открыть {!isPaidContent && <ArrowForwardIcon sx={{ fontSize: 18 }} />}
               </button>
+            )}
+            {(onFavoriteAdd || onFavoriteRemove) && (
+              <div
+                className={`${e('favorite-row')} ${isFavorite ? 'card__favorite-row--active' : ''}`}
+                onClick={handleFavoriteClick}
+              >
+                {isFavorite ? (
+                  <>
+                    <Favorite sx={{ fontSize: 20, color: '#ff5252' }} />
+                    <span className={e('favorite-text')}>В избранном</span>
+                    <span className={e('favorite-text-hover')}>Убрать из избранного</span>
+                  </>
+                ) : (
+                  <>
+                    <FavoriteBorder sx={{ fontSize: 20, color: '#888' }} />
+                    <span className={e('favorite-text')}>Добавить в избранное</span>
+                    <span className={e('favorite-text-hover')}>Добавить в избранное</span>
+                  </>
+                )}
+              </div>
             )}
           </div>
         </div>

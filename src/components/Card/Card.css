@@ -183,3 +183,46 @@
 .card--open .card__subtitle--clickable:hover {
   color: #444444;
 }
+
+.card__favorite-indicator {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.card__favorite-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+  color: #888;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.card__favorite-row--active {
+  color: #ff5252;
+}
+
+.card__favorite-text {
+  color: #666;
+}
+
+.card__favorite-text-hover {
+  display: none;
+  color: #ff5252;
+}
+
+.card__favorite-row:hover .card__favorite-text {
+  display: none;
+}
+
+.card__favorite-row:hover .card__favorite-text-hover {
+  display: inline;
+}
+
+.card__favorite-row:hover {
+  color: #ff5252;
+}
