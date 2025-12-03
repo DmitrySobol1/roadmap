@@ -3,10 +3,12 @@ import { type FC } from 'react';
 
 import { Page } from '@/components/Page.tsx';
 // import { Card } from '@/components/Card/Card.tsx';
-import { Header } from '@/components/Header/Header.tsx';
+import { Header2 } from '@/components/Header2/Header2.tsx';
 // import { CardList } from '@/components/CardList/CardList.tsx';
 
 import { TabbarMenu } from '../../components/TabbarMenu/TabbarMenu.tsx';
+
+import PersonIcon from '@mui/icons-material/Person';
 
 // import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
@@ -38,10 +40,10 @@ export const MyAccountMainPage: FC = () => {
 
   return (
     <Page back={false}>
-      <Header
-        title="My account"
-        //   subtitle="про разработку для «не кодеров»"
-      />
+      <Header2
+                title="Мой аккаунт"
+                icon={<PersonIcon sx={{ color: '#4ade80', fontSize: 24 }} />}
+              />
 
       <TabbarMenu />
     </Page>

@@ -4,7 +4,7 @@ import axios from '@/axios';
 
 import { Page } from '@/components/Page.tsx';
 import { Card } from '@/components/Card/Card.tsx';
-import { Header } from '@/components/Header/Header.tsx';
+import { Header2 } from '@/components/Header2/Header2.tsx';
 import { CardList } from '@/components/CardList/CardList.tsx';
 import { useTlgid } from '@/components/Tlgid.tsx';
 import { useUser } from '@/context/UserContext';
@@ -15,6 +15,10 @@ import { TabbarMenu } from '../../components/TabbarMenu/TabbarMenu.tsx';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LockIcon from '@mui/icons-material/Lock';
 import { CircularProgress } from '@mui/material';
+
+
+
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 interface CourseType {
   _id: string;
@@ -156,7 +160,10 @@ export const FavoritesLessonsPage: FC = () => {
   if (loading) {
     return (
       <Page back={false}>
-        <Header title="Избранные уроки" />
+        <Header2
+          title="Избранные уроки"
+          icon={<FavoriteIcon sx={{ color: '#ff5252', fontSize: 24 }} />}
+        />
         <div
           style={{
             display: 'flex',
@@ -186,7 +193,10 @@ export const FavoritesLessonsPage: FC = () => {
         }
       />
       <div style={{ marginBottom: 100 }}>
-        <Header title="Избранные уроки" />
+        <Header2
+          title="Избранные уроки"
+          icon={<FavoriteIcon sx={{ color: '#4ade80', fontSize: 24 }} />}
+        />
 
         {lessons.length === 0 ? (
           <p style={{ color: '#888', textAlign: 'center', marginTop: '20px' }}>
