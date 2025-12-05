@@ -89,6 +89,7 @@ export const StockItemPage: FC = () => {
               fontSize: '14px',
               color: '#4ade80',
               overflowX: 'auto',
+              whiteSpace: 'pre-line' 
             }}
           >
             {stockItem.text1}
@@ -106,6 +107,7 @@ export const StockItemPage: FC = () => {
               fontSize: '14px',
               color: '#4ade80',
               overflowX: 'auto',
+              whiteSpace: 'pre-line' 
             }}
           >
             {stockItem.text2}
