@@ -59,6 +59,7 @@ export const IndexPage: FC = () => {
 
   return (
     <Page back={false}>
+      <div style={{ marginBottom: 100}}>
       <Header title="Easy dev" subtitle="про разработку для «не кодеров»" />
       <CardList>
         {courseTypes.map((item) => (
@@ -79,7 +80,7 @@ export const IndexPage: FC = () => {
           />
         ))}
       </CardList>
-
+</div>
       <TabbarMenu />
     </Page>
   );

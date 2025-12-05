@@ -110,6 +110,7 @@ export const CourseListPage: FC = () => {
     <Page back={true}>
       <AlertMessage show={showAlert} />
       {/* <Header subtitle={courseTypeName || 'Уроки'} /> */}
+      <div style={{ marginBottom: 100}}>
       <Header2 title={`Модуль по «${courseTypeName}»`} />
       <Text text='Список обучалок:'/>
       {/* <Header2 subtitle='Список обучалок:' /> */}
@@ -151,7 +152,7 @@ export const CourseListPage: FC = () => {
           ))}
         </CardList>
       )}
-
+        </div>
       <TabbarMenu />
     </Page>
   );
