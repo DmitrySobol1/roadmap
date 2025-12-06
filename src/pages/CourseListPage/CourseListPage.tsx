@@ -111,7 +111,7 @@ export const CourseListPage: FC = () => {
       <AlertMessage show={showAlert} />
       {/* <Header subtitle={courseTypeName || 'Уроки'} /> */}
       <div style={{ marginBottom: 100}}>
-      <Header2 title={`Модуль по «${courseTypeName}»`} />
+      <Header2 title={`Модуль про «${courseTypeName}»`} />
       <Text text='Список обучалок:'/>
       {/* <Header2 subtitle='Список обучалок:' /> */}
       {courses.length === 0 ? (
