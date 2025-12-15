@@ -13,7 +13,8 @@ import { AlertMessage, AlertActionButton } from '@/components/AlertMessage/Alert
 import { TabbarMenu } from '../../components/TabbarMenu/TabbarMenu.tsx';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import LockIcon from '@mui/icons-material/Lock';
+import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
+// import LockIcon from '@mui/icons-material/Lock';
 import { CircularProgress } from '@mui/material';
 
 
@@ -212,9 +213,10 @@ export const FavoritesLessonsPage: FC = () => {
                 badge={{
                   isShown: true,
                   text: isAccessible(lesson) ? (
-                    <ArrowForwardIcon sx={{ fontSize: 18 }} />
+                    <ArrowForwardIcon sx={{ fontSize: 18 }} /> 
                   ) : (
-                    <LockIcon sx={{ fontSize: 18 }} />
+                    <CurrencyRubleIcon sx={{ fontSize: 18 }} />
+                    // <LockIcon sx={{ fontSize: 18 }} />
                   ),
                   color: isAccessible(lesson) ? '#c8e6c9' : '#ff5252',
                 }}
