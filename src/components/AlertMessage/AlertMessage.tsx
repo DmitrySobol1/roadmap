@@ -34,8 +34,8 @@ export const AlertMessage: FC<AlertMessageProps> = ({
     navigate(ROUTES.MY_ACCOUNT);
   };
 
-  // Показываем кнопку если: это error или явно передан showButton
-  const shouldShowButton = variant === 'error' || showButton;
+  // Показываем кнопку если: явно передан showButton, или это error и showButton не установлен в false
+  const shouldShowButton = showButton !== undefined ? showButton : variant === 'error';
 
   return (
     <Slide direction="down" in={show} mountOnEnter unmountOnExit>
