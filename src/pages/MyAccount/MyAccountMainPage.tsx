@@ -1,5 +1,6 @@
-import { type FC, useState } from 'react';
+import { type FC } from 'react';
 // import { useNavigate } from 'react-router-dom';
+import { miniApp } from '@tma.js/sdk-react';
 
 import { Page } from '@/components/Page.tsx';
 // import { Card } from '@/components/Card/Card.tsx';
@@ -14,7 +15,7 @@ import { Button } from '@mui/material';
 
 import { useTlgid } from '../../components/Tlgid';
 import { useUser } from '@/context/UserContext';
-import { AlertMessage } from '@/components/AlertMessage/AlertMessage.tsx';
+// import { AlertMessage } from '@/components/AlertMessage/AlertMessage.tsx';
 // import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 import './MyAccountMainPage.css';
@@ -30,7 +31,7 @@ import './MyAccountMainPage.css';
 export const MyAccountMainPage: FC = () => {
   const { tlgid, name } = useTlgid();
   const { isPayed, dateTillPayed } = useUser();
-  const [showPaymentAlert, setShowPaymentAlert] = useState(false);
+  // const [showPaymentAlert, setShowPaymentAlert] = useState(false);
   //   const navigate = useNavigate();
   //   const [courseTypes, setCourseTypes] = useState<CourseType[]>([]);
 
@@ -50,18 +51,27 @@ export const MyAccountMainPage: FC = () => {
       // Отправляем сообщение боту через backend API
       await axios.post('/sendPaymentMessage', { tlgid });
 
-      // Показываем Alert
-      setShowPaymentAlert(true);
+      // // Показываем Alert
+      // setShowPaymentAlert(true);
 
-      // Скрываем Alert через 3 секунды
-      setTimeout(() => {
-        setShowPaymentAlert(false);
-      }, 3000);
+      // // Скрываем Alert через 3 секунды
+      // setTimeout(() => {
+      //   setShowPaymentAlert(false);
+      // }, 3000);
 
       // Сворачиваем Mini App
-      const tg = (window as any).Telegram?.WebApp;
-      if (tg?.minimize) {
-        tg.minimize();
+      try {
+        // console.log('miniApp:', miniApp);
+        // console.log('miniApp.close:', miniApp.close);
+
+        if (miniApp.close) {
+          // console.log('Calling miniApp.close()');
+          miniApp.close();
+        } else {
+          console.log('miniApp.close() not available');
+        }
+      } catch (err) {
+        console.error('Error closing miniApp:', err);
       }
     } catch (error) {
       console.error('Error sending payment message:', error);
@@ -72,11 +82,11 @@ export const MyAccountMainPage: FC = () => {
 
   return (
     <Page back={false}>
-      <AlertMessage
+      {/* <AlertMessage
         show={showPaymentAlert}
         message="информация о продлении направлена в бота"
         variant="success"
-      />
+      /> */}
 
       <Header2
         title="Мой аккаунт"
