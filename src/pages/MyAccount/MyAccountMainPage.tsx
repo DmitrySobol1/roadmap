@@ -122,7 +122,7 @@ export const MyAccountMainPage: FC = () => {
       {/* <Text padding="10px 10px 0px 20px" text = 'Специальные условия'/>
       <Text padding="10px 10px 0px 20px" text = 'в честь запуска проекта'/> */}
 
-      <img src='../../../assets/spec_offer_png.png' style={{ width: '100%', transform: 'rotate(10deg)' }}></img>
+      <img src='/assets/spec_offer_png.png' style={{ width: '100%', transform: 'rotate(10deg)' }}></img>
 
       <TabbarMenu />
     </Page>
