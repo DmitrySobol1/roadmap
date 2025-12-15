@@ -97,6 +97,11 @@
   color: white;
 }
 
+.card__badge-wrapper--recording:hover .card__badge {
+  background-color: #f57c00 !important;
+  color: white;
+}
+
 /* Аккордеон контент с анимацией */
 .card__accordion-content {
   display: grid;
@@ -178,6 +183,18 @@
 
 .card__open-button--paid:active {
   background-color: #d44242;
+}
+
+.card__open-button--recording {
+  background-color: #ff9800;
+}
+
+.card__open-button--recording:hover {
+  background-color: #f57c00;
+}
+
+.card__open-button--recording:active {
+  background-color: #e65100;
 }
 
 .card--open .card__subtitle--clickable:hover {

@@ -12,10 +12,13 @@ import { TabbarMenu } from '../../components/TabbarMenu/TabbarMenu.tsx';
 import { useUser } from '@/context/UserContext';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-// import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
-import LockIcon from '@mui/icons-material/Lock';
+import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
+// import LockIcon from '@mui/icons-material/Lock';
+import MicOffIcon from '@mui/icons-material/MicOff';
+
 import { CircularProgress } from '@mui/material';
 import { AlertMessage } from '@/components/AlertMessage/AlertMessage.tsx';
+
 
 interface CourseType {
   _id: string;
@@ -32,6 +35,7 @@ interface Course {
   orderNumber: number;
   type: CourseType;
   lessonsQty?: number;
+  isRecorded?: boolean;
 }
 
 interface LocationState {
@@ -48,6 +52,7 @@ export const CourseListPage: FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [showRecordingAlert, setShowRecordingAlert] = useState<boolean>(false);
   const [loading, setLoading] = useState(true);
 
   const courseTypeName = state?.courseTypeName || courses[0]?.type?.name || '';
@@ -73,6 +78,13 @@ export const CourseListPage: FC = () => {
 
   const handleToggle = (id: string) => {
     setOpenAccordion(openAccordion === id ? null : id);
+    setShowAlert(false);
+    setShowRecordingAlert(false);
+  };
+
+  const handleRecordingBadgeClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowRecordingAlert(true);
     setShowAlert(false);
   };
 
@@ -109,6 +121,11 @@ export const CourseListPage: FC = () => {
   return (
     <Page back={true}>
       <AlertMessage show={showAlert} />
+      <AlertMessage
+        show={showRecordingAlert}
+        message="данная обучалка в процессе записи"
+        variant="warning"
+      />
       {/* <Header subtitle={courseTypeName || 'Уроки'} /> */}
       <div style={{ marginBottom: 100}}>
       <Header2 title={`Модуль про «${courseTypeName}»`} />
@@ -128,16 +145,21 @@ export const CourseListPage: FC = () => {
               subtitle={course.shortDescription || ''}
               badge={{
                 isShown: true,
-                text: isAccessible(course) ? (
+                text: course.isRecorded === false ? (
+                  <MicOffIcon sx={{ fontSize: 18 }} />
+                ) : isAccessible(course) ? (
                   <ArrowForwardIcon sx={{ fontSize: 18 }} />
                 ) : (
-                  // <CurrencyRubleIcon sx={{ fontSize: 18 }} />
+                  <CurrencyRubleIcon sx={{ fontSize: 18 }} />
 
-                  <LockIcon sx={{ fontSize: 18 }} />
+                  // <LockIcon sx={{ fontSize: 18 }} />
                 ),
-                color: isAccessible(course)
-                  ? course.type?.color || '#c8e6c9'
-                  : '#ff5252',
+                color: course.isRecorded === false
+                  ? '#ff9800'
+                  : isAccessible(course)
+                    ? course.type?.color || '#c8e6c9'
+                    : '#ff5252',
+                onBadgeClick: course.isRecorded === false ? handleRecordingBadgeClick : undefined,
               }}
               isAccordion={true}
               accordionContent={

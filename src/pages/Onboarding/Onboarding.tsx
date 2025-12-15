@@ -13,7 +13,7 @@ import { Button } from '@mui/material';
 import axios from '../../axios';
 
 export const Onboarding: FC = () => {
-  const tlgid = useTlgid();
+  const { tlgid, name } = useTlgid();
   const navigate = useNavigate();
 
   const handleComplete = async () => {

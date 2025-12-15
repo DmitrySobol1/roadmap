@@ -35,7 +35,7 @@ interface Lesson {
 export const LessonPage: FC = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
   const navigate = useNavigate();
-  const tlgid = useTlgid();
+  const { tlgid } = useTlgid();
   const { isPayed } = useUser();
 
   const [lesson, setLesson] = useState<Lesson | null>(null);

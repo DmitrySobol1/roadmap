@@ -13,8 +13,8 @@ import { useUser } from '@/context/UserContext';
 import { useTlgid } from '@/components/Tlgid.tsx';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-// import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
-import LockIcon from '@mui/icons-material/Lock';
+import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
+// import LockIcon from '@mui/icons-material/Lock';
 import { CircularProgress } from '@mui/material';
 import { AlertMessage } from '@/components/AlertMessage/AlertMessage.tsx';
 
@@ -45,7 +45,7 @@ export const LessonListPage: FC = () => {
   const navigate = useNavigate();
   const state = location.state as LocationState;
   const { isPayed } = useUser();
-  const tlgid = useTlgid();
+  const { tlgid } = useTlgid();
 
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
@@ -165,8 +165,8 @@ export const LessonListPage: FC = () => {
                 text: isAccessible(lesson) ? (
                   <ArrowForwardIcon sx={{ fontSize: 18 }} />
                 ) : (
-                  // <CurrencyRubleIcon sx={{ fontSize: 18 }} />
-                  <LockIcon sx={{ fontSize: 18 }} />
+                  <CurrencyRubleIcon sx={{ fontSize: 18 }} />
+                  // <LockIcon sx={{ fontSize: 18 }} />
                 ),
                 color: isAccessible(lesson) ? badgeColor : '#ff5252',
               }}

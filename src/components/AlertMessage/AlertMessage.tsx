@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import { Alert, Slide, Button } from '@mui/material';
 
-type AlertVariant = 'error' | 'warning';
+type AlertVariant = 'error' | 'warning' | 'success';
 
 interface AlertMessageProps {
   show: boolean;
@@ -13,11 +13,12 @@ interface AlertMessageProps {
 const variantStyles: Record<AlertVariant, { bg: string; color: string }> = {
   error: { bg: '#ff5252', color: '#fff' },
   warning: { bg: '#ff9800', color: '#fff' },
+  success: { bg: '#4ade80', color: '#000' },
 };
 
 export const AlertMessage: FC<AlertMessageProps> = ({
   show,
-  message = 'Данный контент пока не доступен',
+  message = 'Данный контент доступен на платной подписке',
   variant = 'error',
   action,
 }) => {

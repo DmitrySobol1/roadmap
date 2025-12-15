@@ -15,6 +15,7 @@ interface BadgeProps {
   isShown: boolean;
   text: ReactNode;
   color?: string;
+  onBadgeClick?: (e: React.MouseEvent) => void;
 }
 
 interface CardProps {
@@ -72,7 +73,9 @@ export const Card: FC<CardProps> = ({
   };
 
   const handleBadgeClick = (e: React.MouseEvent) => {
-    if (isAccordion && onClick) {
+    if (badge?.onBadgeClick) {
+      badge.onBadgeClick(e);
+    } else if (isAccordion && onClick) {
       e.stopPropagation();
       onClick();
     }
@@ -88,11 +91,14 @@ export const Card: FC<CardProps> = ({
   };
 
   const isPaidContent = badge?.color === '#ff5252';
+  const isRecordingContent = badge?.color === '#ff9800';
   const badgeBackgroundColor = isPaidContent
     ? '#ff5252'
-    : isOpen && isAccordion
-      ? '#4ade80'
-      : (badge?.color || '#c8e6c9');
+    : isRecordingContent
+      ? '#ff9800'
+      : isOpen && isAccordion
+        ? '#4ade80'
+        : (badge?.color || '#c8e6c9'); 
 
   return (
     <div
@@ -146,7 +152,7 @@ export const Card: FC<CardProps> = ({
         </div>
         {badge?.isShown && (
           <div
-            className={`${e('badge-wrapper')} ${onClick ? 'card__badge-wrapper--clickable' : ''} ${onClick && !isPaidContent ? 'card__badge-wrapper--accessible' : ''} ${onClick && isPaidContent ? 'card__badge-wrapper--paid' : ''}`}
+            className={`${e('badge-wrapper')} ${onClick || badge.onBadgeClick ? 'card__badge-wrapper--clickable' : ''} ${(onClick || badge.onBadgeClick) && !isPaidContent && !isRecordingContent ? 'card__badge-wrapper--accessible' : ''} ${isPaidContent ? 'card__badge-wrapper--paid' : ''} ${isRecordingContent ? 'card__badge-wrapper--recording' : ''}`}
             onClick={handleBadgeClick}
           >
             <div
@@ -164,10 +170,10 @@ export const Card: FC<CardProps> = ({
             {accordionContent}
             {onClick && (
               <button
-                className={`${e('open-button')} ${isPaidContent ? 'card__open-button--paid' : ''}`}
+                className={`${e('open-button')} ${isPaidContent ? 'card__open-button--paid' : ''} ${isRecordingContent ? 'card__open-button--recording' : ''}`}
                 onClick={handleBadgeClick}
               >
-                Открыть {!isPaidContent && <ArrowForwardIcon sx={{ fontSize: 18 }} />}
+                Открыть {!isPaidContent && !isRecordingContent && <ArrowForwardIcon sx={{ fontSize: 18 }} />}
               </button>
             )}
             {(onFavoriteAdd || onFavoriteRemove) && (

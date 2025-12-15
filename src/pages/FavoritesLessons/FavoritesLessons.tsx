@@ -44,7 +44,7 @@ interface Lesson {
 
 export const FavoritesLessonsPage: FC = () => {
   const navigate = useNavigate();
-  const tlgid = useTlgid();
+  const { tlgid } = useTlgid();
   const { isPayed } = useUser();
 
   const [lessons, setLessons] = useState<Lesson[]>([]);
@@ -181,7 +181,7 @@ export const FavoritesLessonsPage: FC = () => {
 
   return (
     <Page back={false}>
-      <AlertMessage show={showAccessAlert} message="Данный контент пока не доступен" />
+      <AlertMessage show={showAccessAlert} message="Данный контент доступен на платной подписке" />
       <AlertMessage
         show={removedLesson !== null && !showAccessAlert}
         message="Урок удален из избранного"

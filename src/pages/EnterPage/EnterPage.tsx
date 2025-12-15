@@ -16,9 +16,9 @@ import { Page } from '@/components/Page.tsx';
 
 export const EnterPage: FC = () => {
   const navigate = useNavigate();
-  const { setIsPayed } = useUser();
+  const { setIsPayed, setDateTillPayed } = useUser();
 
-    const tlgid = useTlgid();
+    const { tlgid } = useTlgid();
   // const tlgid = 888;
 
   //   const [showTryLater, setShowTryLater] = useState(false);
@@ -34,8 +34,9 @@ export const EnterPage: FC = () => {
           setIsLoading(false);
         }
 
-        const { result, isPayed } = response.data.userData;
+        const { result, isPayed, dateTillPayed } = response.data.userData;
 setIsPayed(isPayed || false);
+        setDateTillPayed(dateTillPayed || null);
 
         if (result === 'showOnboarding') {
           console.log('showOnboarding');
