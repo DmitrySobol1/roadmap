@@ -182,7 +182,7 @@ export const FavoritesLessonsPage: FC = () => {
 
   return (
     <Page back={false}>
-      <AlertMessage show={showAccessAlert} message="Данный контент доступен на платной подписке" />
+      <AlertMessage show={showAccessAlert} message="Данный контент доступен на платной подписке" showButton={true}/>
       <AlertMessage
         show={removedLesson !== null && !showAccessAlert}
         message="Урок удален из избранного"

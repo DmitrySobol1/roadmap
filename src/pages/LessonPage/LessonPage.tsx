@@ -148,7 +148,7 @@ export const LessonPage: FC = () => {
 
   return (
     <Page back={true}>
-      <AlertMessage show={showAlert} message="Следующий урок доступен на платной подписке" />
+      <AlertMessage show={showAlert} message="Следующий урок доступен на платной подписке" showButton={true} />
       <div style={{ marginBottom: 100}}>
       <Header2 subtitle={lesson?.name || 'Урок'} />
 

@@ -143,7 +143,7 @@ export const LessonListPage: FC = () => {
   return (
     <Page back={true} >
       <div style={{ marginBottom: 100}}>
-      <AlertMessage show={showAlert} />
+      <AlertMessage show={showAlert} showButton={true} />
       {/* <Header2 subtitle={courseName || 'Уроки'} /> */}
       <Header2 subtitle={`Обучалка «${courseName}»`} />
       <Text text='Список уроков:'/>

@@ -120,7 +120,7 @@ export const CourseListPage: FC = () => {
 
   return (
     <Page back={true}>
-      <AlertMessage show={showAlert} />
+      <AlertMessage show={showAlert} showButton={true} />
       <AlertMessage
         show={showRecordingAlert}
         message="данная обучалка в процессе записи"
