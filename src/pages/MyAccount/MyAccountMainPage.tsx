@@ -105,7 +105,8 @@ export const MyAccountMainPage: FC = () => {
       )}
 
       <Text padding="20px 10px 0px 20px" text = 'Оформить подписку можно:'/>
-      <Text padding="0px 10px 0px 20px" text = 'на 1 месяц, 3, 6 или 12 месяцев'/>
+      {/* <Text padding="0px 10px 0px 20px" text = 'на 1 месяц, 3, 6 или 12 месяцев'/> */}
+      <Text padding="0px 10px 0px 20px" text = 'на 1 месяц'/>
       <Text padding="10px 10px 0px 20px" text = 'Подписка дает доступ ко всему контенту, без ограничений!'/>
 
       <div className="payment-button-wrapper">
@@ -122,7 +123,7 @@ export const MyAccountMainPage: FC = () => {
       {/* <Text padding="10px 10px 0px 20px" text = 'Специальные условия'/>
       <Text padding="10px 10px 0px 20px" text = 'в честь запуска проекта'/> */}
 
-      <img src='/assets/spec_offer_png.png' style={{ width: '100%', transform: 'rotate(10deg)' }}></img>
+      {/* <img src='/assets/spec_offer_png.png' style={{ width: '100%', transform: 'rotate(10deg)' }}></img> */}
 
       <TabbarMenu />
     </Page>
